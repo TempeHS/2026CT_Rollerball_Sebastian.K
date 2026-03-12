@@ -10,9 +10,8 @@ public class playercontroller : MonoBehaviour
     public float speed = 0; 
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
-
+    public int count;
     private Rigidbody rb; 
-    private int count;
     private float movementX;
     private float movementY;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,7 +31,7 @@ public class playercontroller : MonoBehaviour
         movementY = movementVector.y; 
     }
 
-            void SetCountText()
+    void SetCountText()
     {
         countText.text =  "Count: " + count.ToString();
 
@@ -40,6 +39,8 @@ public class playercontroller : MonoBehaviour
         {
             winTextObject.SetActive(true);
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+            Destroy(GameObject.FindGameObjectWithTag("Enemy 2"));
+            Destroy(GameObject.FindGameObjectWithTag("Enemy 3"));
         }
     }
 
@@ -58,9 +59,21 @@ public class playercontroller : MonoBehaviour
        winTextObject.gameObject.SetActive(true);
        winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
    }
+   if (collision.gameObject.CompareTag("Enemy 2"))
+   {
+       Destroy(gameObject);
+       winTextObject.gameObject.SetActive(true);
+       winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
+   }
+   if (collision.gameObject.CompareTag("Enemy 3"))
+   {
+       Destroy(gameObject);
+       winTextObject.gameObject.SetActive(true);
+       winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
+   }
 }
 
-   private void OnTriggerEnter(Collider other)
+   public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Pick up"))
         {
