@@ -5,7 +5,6 @@ public class Enemy_Movement : MonoBehaviour
 {
 
     public Transform player;
-    public GameObject Enemy;
     
     private int count;
     private NavMeshAgent navMeshAgent;
@@ -13,7 +12,6 @@ public class Enemy_Movement : MonoBehaviour
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        Instantiate(Enemy, 0, 0, 5, Quaternion.identity);
     }
 
   
