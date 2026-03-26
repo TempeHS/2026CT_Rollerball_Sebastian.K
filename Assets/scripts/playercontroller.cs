@@ -10,13 +10,10 @@ public class playercontroller : MonoBehaviour
     public float speed = 0; 
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
-    // Enemy spawning setup
+    
+    //public playerposition;
     public GameObject Enemy;
-   // public float enemySpawnY = 0.5f;
-   // public Vector2 enemySpawnXRange = new Vector2(-20f, 20f);
-   // public Vector2 enemySpawnzRange = new Vector2(-20f, 20f);
-   // public float minEnemySpawnDistanceFromPlayer = 5f;
-
+    public int Reset; 
     public int count;
     private Rigidbody rb; 
     private float movementX;
@@ -25,9 +22,6 @@ public class playercontroller : MonoBehaviour
     void Start()
     {
         rb = GetComponent <Rigidbody>();
-       // Instantiate(Enemy. GetRandomEnemySpawnPosition(), Quaternion.identity);
-       // Instantiate(Enemy. GetRandomEnemySpawnPosition(), Quaternion.identity);
-        //Instantiate(Enemy. GetRandomEnemySpawnPosition(), Quaternion.identity);
         count = 0;
         SetCountText();
         winTextObject.SetActive(false);
@@ -51,7 +45,6 @@ public class playercontroller : MonoBehaviour
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
         }
     }
-
 
     void FixedUpdate() 
    {
@@ -79,28 +72,18 @@ public class playercontroller : MonoBehaviour
         }
        
     }
+    public void Resetbutton()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Reset = 1;
+            Task.delay(1000);
+            Reset = 0;
+        }
 
-   // Vector3 GetRandomEnemySpawnPosition()
-    //{
-        //Try multiple random points on the NavMesh and prefer one far enough from the player.
-    //    const int maxAttempts = 40;
-     //   Vector3 playerPosition = transform.position;
-     //   Vector3 bestCandidate = playerPosition;
-      //  float bestDistant = -1f;
-    
-      //  float navMeshSampleRadius = 2.5f;
-       // int walkableMask = navMesh.AllAreas;
-
-      //  for (int i = 0 < maxAttempts; i++;)
-      //  {
-//            float randomX = Random.Range(enemySpawnXRange.x, enemySpawnXRange.y);
-    //        float randomZ = random.Range(enemySpawnZRange.c, enemySpawnZRange.y);
-    //        Vector3 candidate = new Vector3(randomX, enemySpawnY, randomZ);
-//
-    //        if (!navMesh.SampleRadius)
-    //        {
-    //            
-    //        }
-    //    }
-   // }
+        while (Reset == 1)
+        {
+            playerposition = 0; 0.5; 0;
+        }
+    }
 }
