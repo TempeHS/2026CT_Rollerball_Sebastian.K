@@ -4,16 +4,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 public class playercontroller : MonoBehaviour
 {
     public float speed = 0; 
     public TextMeshProUGUI countText;
-    public GameObject winTextObject;
-    
+    public GameObject winTextObject;    
     //public playerposition;
     public GameObject Enemy;
-    public int Reset; 
     public int count;
     private Rigidbody rb; 
     private float movementX;
@@ -27,6 +25,13 @@ public class playercontroller : MonoBehaviour
         winTextObject.SetActive(false);
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Resetbutton();
+        }
+    }
 
     void OnMove(InputValue movementValue)
     {
@@ -59,6 +64,8 @@ public class playercontroller : MonoBehaviour
        Destroy(gameObject);
        winTextObject.gameObject.SetActive(true);
        winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
+    StartCoroutine(DelayedAction());
+       Resetbutton();
    }
 }
 
@@ -74,16 +81,11 @@ public class playercontroller : MonoBehaviour
     }
     public void Resetbutton()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Reset = 1;
-            Task.delay(1000);
-            Reset = 0;
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 
-        while (Reset == 1)
-        {
-            playerposition = 0; 0.5; 0;
-        }
+       IEnumerator DelayedAction()
+    {
+        yield return new WaitForSeconds(3f);
     }
 }
