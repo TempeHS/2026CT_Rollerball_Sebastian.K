@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections;
 
-public class spawning : MonoBehaviour
+public class spawner : MonoBehaviour
 
 
 {
-    [SerializeField]
-    private float spawntime = 10f;
-    [SerializeField]
-    private GameObject enemyPrefab;
+    
+    public float spawntime = 10f;
+  
+    public GameObject enemyPrefab;
     void Start()
     {
         
@@ -17,21 +17,10 @@ public class spawning : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        while (spawntime != 0)
-        {
-            spawntime--;
-        }
-
-        if (spawntime == 0)
-        {
-            spawntime = 10;
-
-        }
-
         StartCoroutine(spawnEnemy(spawntime, enemyPrefab));
     }
 
-    private IEnumerator spawnEnemy(float interval, GameObject enemy)
+    public IEnumerator spawnEnemy(float interval, GameObject enemy)
     {
         yield return new WaitForSeconds(interval);
         GameObject newEnemy = Instantiate(enemy, new Vector3(0f, 0.5f, 0f), Quaternion.identity);
