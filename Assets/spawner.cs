@@ -3,21 +3,20 @@ using System.Collections;
 
 public class spawner : MonoBehaviour
 
-
 {
     
     public float spawntime = 10f;
-  
     public GameObject enemyPrefab;
     void Start()
     {
-        
+        StartCoroutine(spawnEnemy(spawntime, enemyPrefab));
     }
 
     // Update is called once per frame
     void Update()
     {
-        StartCoroutine(spawnEnemy(spawntime, enemyPrefab));
+        
+
     }
 
     public IEnumerator spawnEnemy(float interval, GameObject enemy)
