@@ -28,9 +28,9 @@ public class playercontroller : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
-        {
-            Resetbutton();
-        }
+            {
+                Resetbutton();
+            }
     }
 
     void OnMove(InputValue movementValue)
@@ -38,6 +38,11 @@ public class playercontroller : MonoBehaviour
         Vector2 movementVector = movementValue.Get<Vector2>();
         movementX = movementVector.x; 
         movementY = movementVector.y; 
+    }
+
+        public void Resetbutton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void SetCountText()
@@ -56,6 +61,10 @@ public class playercontroller : MonoBehaviour
     Vector3 movement = new Vector3 (movementX, 0.0f, movementY);
     rb.AddForce(movement * speed);
    }
+    private IEnumerator DelayedAction()
+    {
+        yield return new WaitForSeconds(3f);
+    }
 
    private void OnCollisionEnter(Collision collision)
 {
@@ -63,9 +72,7 @@ public class playercontroller : MonoBehaviour
    {
        Destroy(gameObject);
        winTextObject.gameObject.SetActive(true);
-       winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
-    StartCoroutine(DelayedAction());
-       Resetbutton();
+       winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose! Press R to restart.";
    }
 }
 
@@ -79,13 +86,6 @@ public class playercontroller : MonoBehaviour
         }
        
     }
-    public void Resetbutton()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    
 
-       IEnumerator DelayedAction()
-    {
-        yield return new WaitForSeconds(3f);
-    }
 }

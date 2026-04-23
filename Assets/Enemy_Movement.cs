@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Enemy_Movement : MonoBehaviour
 {
 
     public Transform player;
-    
     private int count;
     private NavMeshAgent navMeshAgent;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,21 +23,10 @@ public class Enemy_Movement : MonoBehaviour
             navMeshAgent.SetDestination(player.position);
         }
 
-       // if(gameObject.CompareTag("Enemy 2"))
-       // {
-       //    if(count > 3)
-       //     {
-       //       navMeshAgent.SetDestination(player.position);  
-       //     } 
-       // }
-//
-       //  if(gameObject.CompareTag("Enemy 3"))
-       // {
-       //   if(count > 5)
-       //     {
-       //        navMeshAgent.SetDestination(player.position); 
-       //     }  
-       // }
+        if (Input.GetKeyDown(KeyCode.R))
+             {
+                 Resetbutton();
+             }
     }
 
 public void OnTriggerEnter(Collider other)
@@ -47,6 +36,11 @@ public void OnTriggerEnter(Collider other)
             other.gameObject.SetActive(false);
             count = count + 1;
         }
+    }
+
+    public void Resetbutton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
 
